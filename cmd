@@ -3,13 +3,13 @@
 # configurable by the user
 # ------------------------
   editor=vim
-  opt='"+set nonumber"'
-  path=~/.bash/custom/myman
+  editor_opt='"+set nonumber"'
+  path_cheatsheets=~/.bash/custom/myman
 # ------------------------
 
 instdir=$(dirname $BASH_SOURCE)
 script_name=$(basename $BASH_SOURCE)
-script_path="$instdir/$script_name"
+script_path_cheatsheets="$instdir/$script_name"
 param="$1 $2"
 
 clear
@@ -20,7 +20,7 @@ function create_file() {
     read answer
     if [[ "$answer" == "y" ]]; then
         echo
-        eval $editor $opt "$path/cmds-$1"
+        eval $editor $editor_opt "$path_cheatsheets/cmds-$1"
     fi
 }
 
@@ -30,30 +30,31 @@ function create_file() {
 
 case "$param" in
     " ")
-        cat "$path/cmds-default"
+        cat "$path_cheatsheets/cmds-default"
     ;;
     "code ")
-        eval $editor "$script_path"
+        eval $editor "$script_path_cheatsheets"
     ;;
     edit*)
-        if [[ -f "$path/cmds-$2" ]]; then
-            eval $editor $opt "$path/cmds-$2"
+        if [[ -f "$path_cheatsheets/cmds-$2" ]]; then
+            eval $editor $editor_opt "$path_cheatsheets/cmds-$2"
         elif [[ "$2" != "" ]]; then
             create_file "$2"
         elif [[ "$2" == "" ]]; then
-            eval $editor $opt "$path/cmds-default"
+            eval $editor $editor_opt "$path_cheatsheets/cmds-default"
         fi
     ;;
     "files ")
-        echo "$path"
-        ls -1 "$path"
+        echo "$path_cheatsheets"
+        ls -1 "$path_cheatsheets"
     ;;
     *)
-        if [[ -f "$path/cmds-$1" ]]; then
-            cat "$path/cmds-$1"
+        if [[ -f "$path_cheatsheets/cmds-$1" ]]; then
+            cat "$path_cheatsheets/cmds-$1"
         elif [[ "$2" == "" ]]; then
             echo "Syntax: cmd [edit|files|code] [COMMAND]"
-            echo "To list all available cheat sheets: cmd files"
+            echo "To list all available cheatsheets: cmd files"
+            echo "To create a new cheatsheet: cmd new NAME"
         fi
     ;;
 esac
