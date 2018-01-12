@@ -54,7 +54,7 @@ case "$param" in
         elif [[ "$2" == "" ]]; then
             echo "Syntax: cmd [edit|files|code] [COMMAND]"
             echo "To list all available cheatsheets: cmd files"
-            echo "To create a new cheatsheet: cmd new NAME"
+            echo "To create a new cheatsheet or edit an existing: cmd edit NAME"
         fi
     ;;
 esac
