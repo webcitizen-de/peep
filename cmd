@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # configurable by the user
+# TODO separate this into a gitignored file & make it editable by the cmd
 # ------------------------
   editor=vim
   editor_opt='"+set nonumber"'
@@ -9,7 +10,7 @@
 
 instdir=$(dirname $BASH_SOURCE)
 script_name=$(basename $BASH_SOURCE)
-script_path_cheatsheets="$instdir/$script_name"
+script_path="$instdir/$script_name"
 param="$1 $2"
 
 clear
@@ -33,7 +34,7 @@ case "$param" in
         cat "$path_cheatsheets/cmds-default"
     ;;
     "code ")
-        eval $editor "$script_path_cheatsheets"
+        eval $editor "$script_path"
     ;;
     edit*)
         if [[ -f "$path_cheatsheets/cmds-$2" ]]; then
