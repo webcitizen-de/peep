@@ -1,0 +1,27 @@
+profile         # opens your .bash_profile in Sublime Text
+aliases         # opens your .bashrc in Sublime Text (+ .cd)
+aliases.load    # sources your .bashrc into your current bash session
+aliases.smedia  # opens your aliases regarding to //SEIBERT/MEDIA
+hosts		# shows the user's hosts file (+ edit)
+ssh.edit	# opens your ssh configuration in vim
+ 
+brew list	# show all installed commands via Homebrew
+bwiz            # BundleWrap Wizard - prints all subcommands
+openldap	# query the ldap.smedia.tools on the command line
+pass 		# prints a random string, e.g. for a password
+sshp		# ssh plus - additionally copies your bash aliases & functions
+vbox		# VirtualBox - control it on the command line
+vpn		# Viscosity VPN client - control it on the command line
+yoo		# Your Obedient Octopussy - prints all subcommands
+
+
+================  FILE / DIRECTORY HANDLING  ==================================
+ag		# Silver Searcher - grep on steroids
+mc		# Midnight Commander
+
+
+================  MACOS HANDLING  =============================================
+fkeys           # activates / deactivates the f keys of your Mac computer
+hide.no		# shows all by default hidden files
+hide.yes	# hides all by default hidden files
+wifi		# shows all available wifi networks
