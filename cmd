@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
+# SYNOPSIS peep is a super simple note management tool for the Bash command line
+# Maintainer Christopher Engelmann
 
 # configurable by the user
-# TODO separate this into a gitignored file & make it editable by the cmd
 # ------------------------
   editor=vim
   editor_opt='"+set nonumber"'
-  path_cheatsheets=~/.bash/custom/myman
+  path_cheatsheets=~/.bash/custom/peep
 # ------------------------
+# TODO separate this into a gitignored file & make it editable by the cmd
 
 instdir=$(dirname $BASH_SOURCE)
 script_name=$(basename $BASH_SOURCE)
@@ -16,7 +18,7 @@ param="$1 $2"
 clear
 
 function create_file() {
-    echo "That cheat sheet $1 doesn't exist, yet!"
+    echo "That cheatsheet $1 doesn't exist, yet!"
     echo "Do you like to create it now? [y|n] "
     read answer
     if [[ "$answer" == "y" ]]; then
@@ -53,9 +55,9 @@ case "$param" in
         if [[ -f "$path_cheatsheets/cmds-$1" ]]; then
             cat "$path_cheatsheets/cmds-$1"
         elif [[ "$2" == "" ]]; then
-            echo "Syntax: cmd [edit|files|code] [COMMAND]"
-            echo "To list all available cheatsheets: cmd files"
-            echo "To create a new cheatsheet or edit an existing: cmd edit NAME"
+            echo "Syntax: peep [edit [filename]]|files|code] [COMMAND]"
+            echo "To list all available cheatsheets: peep files"
+            echo "To create a new cheatsheet or edit an existing: peep edit NAME"
         fi
     ;;
 esac
