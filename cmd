@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# SYNOPSIS peep is a super simple note management tool for the Bash command line
-# Maintainer Christopher Engelmann
+# SYNOPSIS  peep is a super simple note management tool for the Bash command line
+# AUTHOR    Christopher Engelmann
 
 # configurable by the user
 # ------------------------
