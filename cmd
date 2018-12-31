@@ -27,10 +27,6 @@ function create_file() {
     fi
 }
 
-# echo "\$1 ist: $1"
-# echo "\$2 ist: $2"
-# echo -e "Parameter ist: $param\n"
-
 case "$param" in
     " ")
         cat "$path_cheatsheets/cmds-default"
