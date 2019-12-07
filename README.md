@@ -17,4 +17,4 @@ If you just need a handy tool to manage your quick'n'dirty notes on the basis of
     Show the notes in trash:      peep trash
     Empty the trash:              peep empty trash
 
-    Edit the configuration:       peep config"
+    Edit the configuration:       peep config
