@@ -7,7 +7,6 @@ instdir=$(dirname $BASH_SOURCE)
 script_name=$(basename $BASH_SOURCE)
 script_path="$instdir/$script_name"
 config_file="peep.config"
-[[ ! -f $path_notes/.trash ]] && mkdir "$path_notes/.trash"
 
 if [[ -f $config_file ]]; then
     source "$config_file"
@@ -15,6 +14,8 @@ else
     echo "Error. Missing configuration file '$config_file'"
     exit 1
 fi
+
+[[ ! -f $path_notes/.trash ]] && mkdir -p "$path_notes/.trash"
 
 clear
 
@@ -80,13 +81,13 @@ case "$parameters" in
 
     "e "*|"edit "*)
         if [[ -f $path_notes/$2 ]]; then
-            eval $editor $editor_opt "$path_notes/$2"
+            eval "$editor" "$editor_opt" "$path_notes/$2"
 
         elif [[ $2 != "" ]]; then
             create_file "$2"
 
         elif [[ $2 == "" ]]; then
-            eval $editor $editor_opt "$path_notes/default"
+            eval "$editor" "$editor_opt" "$path_notes/default"
         fi
     ;;
 
