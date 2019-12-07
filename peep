@@ -4,56 +4,107 @@
 
 # configurable by the user
 # ------------------------
+  printing_tool=less
   editor=vim
   editor_opt='"+set nonumber"'
-  path_cheatsheets=~/.bash/custom/peep
+  path_notes=~/.peep
 # ------------------------
 # TODO separate this into a gitignored file & make it editable by the cmd
 
 instdir=$(dirname $BASH_SOURCE)
 script_name=$(basename $BASH_SOURCE)
 script_path="$instdir/$script_name"
-param="$1 $2"
+[[ ! -f $path_notes/.trash ]] && mkdir "$path_notes/.trash"
 
 clear
 
+
 function create_file() {
-    echo "That cheatsheet $1 doesn't exist, yet!"
+
+    echo "The note '${1}' doesn't exist yet!"
     echo "Do you like to create it now? [y|n] "
     read answer
-    if [[ "$answer" == "y" ]]; then
-        echo
-        eval $editor $editor_opt "$path_cheatsheets/cmds-$1"
-    fi
+    [[ $answer == "y" ]] && echo; eval $editor $editor_opt "$path_notes/$1"
 }
 
-case "$param" in
-    " ")
-        cat "$path_cheatsheets/cmds-default"
-    ;;
+function print_help() {
+
+    echo "Syntax: peep [e|edit] NOTENAME | notes|code"
+    echo
+    echo "Create a new note just type:  peep YOUR_NOTENAME"
+    echo "Edit a existing file:         peep e YOUR_NOTENAME  OR  peep edit YOUR_NOTENAME"
+    echo "List all available notes:     peep notes"
+    echo
+    echo "Move a note to the trash:     peep d YOUR_NOTENAME  OR  peep delete YOUR_NOTENAME"
+    echo "Show the notes in trash:      peep t  OR  peep trash"
+    echo "Empty the trash:              peep empty trash"
+    echo
+    echo "Edit the source code of peep: peep code"
+    echo
+}
+
+
+# concatenate all parameters which makes the evaluation within the case statement easier
+parameters="$1 $2"
+
+case "$parameters" in
     "code ")
         eval $editor "$script_path"
     ;;
-    edit*)
-        if [[ -f "$path_cheatsheets/cmds-$2" ]]; then
-            eval $editor $editor_opt "$path_cheatsheets/cmds-$2"
-        elif [[ "$2" != "" ]]; then
-            create_file "$2"
-        elif [[ "$2" == "" ]]; then
-            eval $editor $editor_opt "$path_cheatsheets/cmds-default"
+
+    "d "*|"delete "*)
+        if [[ -f $path_notes/$2 ]]; then
+            mv -f "$path_notes/$2" "$path_notes/.trash"
+        else
+            echo "Could not delete the note $1 since it does not exist."
         fi
     ;;
-    "files ")
-        echo "$path_cheatsheets"
-        ls -1 "$path_cheatsheets"
+
+    "empty trash")
+        echo "ATTENTION: I going to delete all of these files for good:"
+        echo
+        command ls -FG "$path_notes/.trash"
+        echo
+        echo "Please confirm that operation (yes)"
+        read -p "--> " confirmation
+        [[ $confirmation == "yes" ]] && eval rm -f "$path_notes/.trash/*" || echo "Execution aborted"
     ;;
+
+    "e "*|"edit "*)
+        if [[ -f $path_notes/$2 ]]; then
+            eval $editor $editor_opt "$path_notes/$2"
+
+        elif [[ $2 != "" ]]; then
+            create_file "$2"
+
+        elif [[ $2 == "" ]]; then
+            eval $editor $editor_opt "$path_notes/default"
+        fi
+    ;;
+
+    "notes ")
+        echo "$path_notes"
+        command ls -FG "$path_notes"
+    ;;
+
+    " ")
+        print_help
+    ;;
+
+    "t "|"trash ")
+        echo "$path_notes/.trash"
+        command ls -FG "$path_notes/.trash"
+    ;;
+
     *)
-        if [[ -f "$path_cheatsheets/cmds-$1" ]]; then
-            cat "$path_cheatsheets/cmds-$1"
-        elif [[ "$2" == "" ]]; then
-            echo "Syntax: peep [edit [filename]]|files|code] [COMMAND]"
-            echo "To list all available cheatsheets: peep files"
-            echo "To create a new cheatsheet or edit an existing: peep edit NAME"
+        if [[ -f $path_notes/$1 ]]; then
+            eval "$printing_tool" "$path_notes/$1"
+
+        elif [[ $2 == "" ]]; then
+            create_file "$1"
+
+        else
+            print_help
         fi
     ;;
 esac
