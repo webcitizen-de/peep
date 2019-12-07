@@ -24,7 +24,10 @@ function create_file() {
     echo "The note '${1}' doesn't exist yet!"
     echo "Do you like to create it now? [y|n] "
     read answer
-    [[ $answer == "y" ]] && echo; eval $editor $editor_opt "$path_notes/$1"
+    if [[ $answer == "y" ]]; then
+        echo
+        eval "$editor" "$editor_opt" "$path_notes/$1"
+    fi
 }
 
 function print_help() {
@@ -68,7 +71,12 @@ case "$parameters" in
         echo
         echo "Please confirm that operation (yes)"
         read -p "--> " confirmation
-        [[ $confirmation == "yes" ]] && eval rm -f "$path_notes/.trash/*" || echo "Execution aborted"
+
+        if [[ $confirmation == "yes" ]]; then
+            eval rm -f "$path_notes/.trash/*"
+        else
+            echo "Execution aborted"
+        fi
     ;;
 
     "e "*|"edit "*)
