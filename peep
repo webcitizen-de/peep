@@ -30,14 +30,14 @@ function create_file() {
 function print_help() {
 
     echo "Syntax: peep [ [e|edit] [d|delete] ] NOTENAME"
-    echo "        peep notes | trash | empty trash | code"
+    echo "        peep notes | [empty] trash | code"
     echo
     echo "Create a new note just type:  peep YOUR_NOTENAME"
     echo "Edit a existing file:         peep e YOUR_NOTENAME  OR  peep edit YOUR_NOTENAME"
     echo "List all available notes:     peep notes"
     echo
     echo "Move a note to the trash:     peep d YOUR_NOTENAME  OR  peep delete YOUR_NOTENAME"
-    echo "Show the notes in trash:      peep t  OR  peep trash"
+    echo "Show the notes in trash:      peep trash"
     echo "Empty the trash:              peep empty trash"
     echo
     echo "Edit the source code of peep: peep code"
