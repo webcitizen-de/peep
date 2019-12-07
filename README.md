@@ -6,6 +6,14 @@
 If you just need a handy tool to manage your quick'n'dirty notes on the basis of simple text files right on the command line, then "peep" might be worth a glance. :)
 
 ### How to use
-    Syntax: peep [edit [filename]]|files|code] [COMMAND]
-    To list all available cheatsheets: peep files
-    To create a new cheatsheet or edit an existing: peep edit NAME
+    Syntax: peep [e|edit] NOTENAME | notes|code
+
+    Create a new note just type:  peep YOUR_NOTENAME
+    Edit a existing file:         peep e YOUR_NOTENAME  OR  peep edit YOUR_NOTENAME
+    List all available notes:     peep notes
+
+    Move a note to the trash:     peep d YOUR_NOTENAME  OR  peep delete YOUR_NOTENAME
+    Show the notes in trash:      peep t  OR  peep trash
+    Empty the trash:              peep empty trash
+
+    Edit the source code of peep: peep code
