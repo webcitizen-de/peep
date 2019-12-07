@@ -29,7 +29,8 @@ function create_file() {
 
 function print_help() {
 
-    echo "Syntax: peep [e|edit] NOTENAME | notes|code"
+    echo "Syntax: peep [ [e|edit] [d|delete] ] NOTENAME"
+    echo "        peep notes | trash | empty trash | code"
     echo
     echo "Create a new note just type:  peep YOUR_NOTENAME"
     echo "Edit a existing file:         peep e YOUR_NOTENAME  OR  peep edit YOUR_NOTENAME"
@@ -91,7 +92,7 @@ case "$parameters" in
         print_help
     ;;
 
-    "t "|"trash ")
+    "trash ")
         echo "$path_notes/.trash"
         command ls -FG "$path_notes/.trash"
     ;;

@@ -6,7 +6,8 @@
 If you just need a handy tool to manage your quick'n'dirty notes on the basis of simple text files right on the command line, then "peep" might be worth a glance. :)
 
 ### How to use
-    Syntax: peep [e|edit] NOTENAME | notes|code
+    Syntax: peep [ [e|edit] [d|delete] ] NOTENAME
+            peep notes | trash | empty trash | code
 
     Create a new note just type:  peep YOUR_NOTENAME
     Edit a existing file:         peep e YOUR_NOTENAME  OR  peep edit YOUR_NOTENAME
