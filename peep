@@ -33,7 +33,7 @@ function create_file() {
 
 function print_help() {
 
-    echo "Syntax: peep [ [e|edit] [d|delete] ] NOTENAME"
+    echo "Syntax: peep [ [a|alias] [e|edit] [d|delete] [r|rename] ] NOTENAME"
     echo "        peep notes | [empty] trash | config"
     echo
     echo "Create a new note just type:  peep YOUR_NOTENAME"
@@ -63,6 +63,11 @@ function check_for_empty_file() {
 parameters="$1 $2"
 
 case "$parameters" in
+
+    "a "*|"alias "*)
+        # TODO
+    ;;
+
     "config ")
         eval "$editor" "$config_file"
     ;;
@@ -108,6 +113,21 @@ case "$parameters" in
             command ls -FG "$path_notes" | command egrep "$2"
         else
             command ls -FG "$path_notes"
+        fi
+    ;;
+
+    "r "*|"rename "*)
+
+        if [[ -f $path_notes/$2 && ! -z $3 ]]; then
+            command mv "$path_notes/$2" "$path_notes/$3"
+        else
+            if [[ ! -f $path_notes/$2 ]]; then
+                echo "A note with the name '$2' does not exist."
+            else
+                echo "Please check your arguments and if !"
+                echo "Syntax: peep rename NOTENAME NEW_NOTENAME"
+                echo "        peep r      NOTENAME NEW_NOTENAME"
+            fi
         fi
     ;;
 
