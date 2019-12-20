@@ -33,7 +33,7 @@ function create_file() {
 
 function print_help() {
 
-    echo "Syntax: peep [ [a|alias] [e|edit] [d|delete] [r|rename] ] NOTENAME"
+    echo "Syntax: peep [ [a|alias] [e|edit] [d|delete] [r|rename] ] YOUR_NOTENAME"
     echo "        peep notes | [empty] trash | config"
     echo
     echo "Create a new note just type:  peep YOUR_NOTENAME"
@@ -124,7 +124,7 @@ case "$parameters" in
             if [[ ! -f $path_notes/$2 ]]; then
                 echo "A note with the name '$2' does not exist."
             else
-                echo "Please check your arguments and if !"
+                echo "Please check your arguments."
                 echo "Syntax: peep rename NOTENAME NEW_NOTENAME"
                 echo "        peep r      NOTENAME NEW_NOTENAME"
             fi
